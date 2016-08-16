@@ -3,8 +3,10 @@ import urllib
 import urlparse
 
 from pyramid.view import view_config
-from pyramid.security import (remember, forget, NO_PERMISSION_REQUIRED)
+from pyramid.security import remember, forget, NO_PERMISSION_REQUIRED
 from pyramid.httpexceptions import HTTPFound
+from pyramid.security import authenticated_userid, unauthenticated_userid
+from pyramid.response import Response
 
 from pyramid_google_login import redirect_to_signin, find_landing_path
 from pyramid_google_login.events import UserLoggedIn, UserLoggedOut
@@ -42,7 +44,7 @@ def signin(request):
     message = request.params.get('message')
     url = request.params.get('url')
 
-    if request.authenticated_userid:
+    if authenticated_userid(request):
         if url:
             return HTTPFound(location=url)
         else:
@@ -119,16 +121,20 @@ def callback(request):
         return redirect_to_signin(request,
                                   'Google Login failed (application error)')
 
-    if user_logged_in.headers:
-        headers = user_logged_in.headers
-    else:
-        headers = remember(request, principal=userid)
-    return HTTPFound(location=url, headers=headers)
+    # if user_logged_in.headers:
+        # headers = user_logged_in.headers
+    # else:
+        # headers = remember(request, principal=userid)
+    user_id = user_logged_in.userid
+    print user_id
+    response = Response()
+    response.set_cookie('authtkt', user_id)
+    return HTTPFound(location=url, headers=response.headers)
 
 
 @view_config(route_name='auth_logout')
 def logout(request):
-    userid = request.unauthenticated_userid
+    userid = request.cookies["authtkt"]
     if userid is not None:
         event = UserLoggedOut(userid)
         request.registry.notify(event)
