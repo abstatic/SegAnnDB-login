@@ -63,7 +63,7 @@ class Test(Base):
 class TestCallback(ApiMockBase):
 
     def test_signin_redirect(self):
-        from pyramid_google_login.exceptions import AuthFailed
+        from seganndb_login.exceptions import AuthFailed
 
         self.googleapi.build_authorize_url.side_effect = AuthFailed('ooops')
 
@@ -93,7 +93,7 @@ class TestCallback(ApiMockBase):
         self.assertFalse(self.googleapi.get_userinfo_from_token.called)
 
     def test_callback_with_failing_subscriber(self):
-        from pyramid_google_login.events import UserLoggedIn
+        from seganndb_login.events import UserLoggedIn
 
         def subscriber(event):
             raise Exception('WTF')

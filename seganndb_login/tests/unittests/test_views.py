@@ -6,7 +6,7 @@ import mock
 class TestIncludeme(unittest.TestCase):
 
     def test_includeme(self):
-        from pyramid_google_login.views import includeme
+        from seganndb_login.views import includeme
 
         config = mock.Mock()
 
@@ -20,13 +20,13 @@ class TestIncludeme(unittest.TestCase):
         ]
         config.add_route.assert_has_calls(expected_calls, any_order=True)
         config.add_static_view.assert_called_once_with(
-            'static/pyramid_google_login',
-            'pyramid_google_login:static',
+            'static/seganndb_login',
+            'seganndb_login:static',
             cache_max_age=300)
-        config.scan.assert_called_once_with('pyramid_google_login.views')
+        config.scan.assert_called_once_with('seganndb_login.views')
 
 
-@mock.patch('pyramid_google_login.views.find_landing_path')
+@mock.patch('seganndb_login.views.find_landing_path')
 class TestSignin(unittest.TestCase):
 
     def setUp(self):
@@ -44,7 +44,7 @@ class TestSignin(unittest.TestCase):
         self.request.route_url.return_value = '/test/url'
 
     def test_nominal(self, m_find_landing_path):
-        from pyramid_google_login.views import signin
+        from seganndb_login.views import signin
 
         resp = signin(self.request)
 
@@ -61,7 +61,7 @@ class TestSignin(unittest.TestCase):
         self.assertEqual(resp, expected)
 
     def test_authenticated(self, m_find_landing_path):
-        from pyramid_google_login.views import signin
+        from seganndb_login.views import signin
         from pyramid.httpexceptions import HTTPFound
 
         self.request.authenticated_userid = '123'
@@ -72,7 +72,7 @@ class TestSignin(unittest.TestCase):
         self.assertEqual(resp.location, m_find_landing_path.return_value)
 
     def test_authenticated_with_url(self, m_find_landing_path):
-        from pyramid_google_login.views import signin
+        from seganndb_login.views import signin
         from pyramid.httpexceptions import HTTPFound
 
         self.request.params['url'] = '/go/there'
@@ -84,7 +84,7 @@ class TestSignin(unittest.TestCase):
         self.assertEqual(resp.location, '/go/there')
 
 
-@mock.patch('pyramid_google_login.views.redirect_to_signin')
+@mock.patch('seganndb_login.views.redirect_to_signin')
 class TestLogout(unittest.TestCase):
 
     def setUp(self):
@@ -93,8 +93,8 @@ class TestLogout(unittest.TestCase):
         self.request.registry.settings = self.settings
 
     def test_nominal(self, m_redirect):
-        from pyramid_google_login.views import logout
-        from pyramid_google_login.events import UserLoggedOut, Event
+        from seganndb_login.views import logout
+        from seganndb_login.events import UserLoggedOut, Event
 
         resp = logout(self.request)
 

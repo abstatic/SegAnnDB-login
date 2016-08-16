@@ -6,9 +6,9 @@
   <title>Sign in</title>
 
   <link rel="stylesheet"
-        href="${request.static_url('pyramid_google_login:static/pure-min.css')}">
+        href="${request.static_url('seganndb_login:static/pure-min.css')}">
   <link rel="stylesheet"
-        href="${request.static_url('pyramid_google_login:static/login.css')}">
+        href="${request.static_url('seganndb_login:static/login.css')}">
 </head>
 <body>
 

@@ -10,7 +10,7 @@ SETTINGS_PREFIX = 'security.google_login.'
 
 
 def includeme(config):
-    log.info("Add pyramid_google_login")
+    log.info("Add seganndb_login")
 
     config.include('pyramid_mako')
     config.include('.utility')

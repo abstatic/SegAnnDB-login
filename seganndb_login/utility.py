@@ -6,8 +6,8 @@ from pyramid.settings import aslist
 from requests.exceptions import RequestException
 import requests
 
-from pyramid_google_login import SETTINGS_PREFIX
-from pyramid_google_login.exceptions import AuthFailed, ApiError
+from seganndb_login import SETTINGS_PREFIX
+from seganndb_login.exceptions import AuthFailed, ApiError
 
 from zope.interface import Interface
 

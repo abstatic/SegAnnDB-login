@@ -6,7 +6,7 @@ from pyramid.request import Request
 from pyramid.scripting import prepare
 from webtest import TestApp
 
-from pyramid_google_login.utility import IApiClientFactory
+from seganndb_login.utility import IApiClientFactory
 
 
 class Base(unittest.TestCase):
@@ -22,7 +22,7 @@ class Base(unittest.TestCase):
     def config(self):
         self.addCleanup(delattr, self, 'config')
         _config = Configurator(settings=self.settings)
-        _config.include('pyramid_google_login')
+        _config.include('seganndb_login')
         return _config
 
     @reify
@@ -44,7 +44,7 @@ class ApiMockBase(Base):
     def config(self):
         _config = super(ApiMockBase, self).config
         _config.commit()
-        _config.include('pyramid_google_login.tests')
+        _config.include('seganndb_login.tests')
         return _config
 
     @reify

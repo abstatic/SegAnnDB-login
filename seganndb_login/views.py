@@ -8,9 +8,9 @@ from pyramid.httpexceptions import HTTPFound
 from pyramid.security import authenticated_userid, unauthenticated_userid
 from pyramid.response import Response
 
-from pyramid_google_login import redirect_to_signin, find_landing_path
-from pyramid_google_login.events import UserLoggedIn, UserLoggedOut
-from pyramid_google_login.exceptions import AuthFailed
+from seganndb_login import redirect_to_signin, find_landing_path
+from seganndb_login.events import UserLoggedIn, UserLoggedOut
+from seganndb_login.exceptions import AuthFailed
 
 log = logging.getLogger(__name__)
 
@@ -21,8 +21,8 @@ def includeme(config):
     config.add_route('auth_callback', '/auth/oauth2callback')
     config.add_route('auth_logout', '/auth/logout')
 
-    config.add_static_view('static/pyramid_google_login',
-                           'pyramid_google_login:static',
+    config.add_static_view('static/seganndb_login',
+                           'seganndb_login:static',
                            cache_max_age=300)
 
     config.scan(__name__)
@@ -38,7 +38,7 @@ def decode_state(state):
 
 @view_config(route_name='auth_signin',
              permission=NO_PERMISSION_REQUIRED,
-             renderer='pyramid_google_login:templates/signin.mako')
+             renderer='seganndb_login:templates/signin.mako')
 def signin(request):
     googleapi_settings = request.registry.settings['googleapi_settings']
     message = request.params.get('message')

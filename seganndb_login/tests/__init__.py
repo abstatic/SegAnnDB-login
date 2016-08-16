@@ -1,6 +1,6 @@
 import mock
 
-from pyramid_google_login.utility import IApiClientFactory
+from seganndb_login.utility import IApiClientFactory
 
 
 def includeme(config):

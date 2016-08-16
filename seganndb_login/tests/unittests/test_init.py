@@ -7,7 +7,7 @@ class TestHelpers(unittest.TestCase):
 
     def test_redirect_to_signin(self):
         from pyramid.httpexceptions import HTTPFound
-        from pyramid_google_login import redirect_to_signin
+        from seganndb_login import redirect_to_signin
 
         request = mock.Mock()
 
@@ -19,7 +19,7 @@ class TestHelpers(unittest.TestCase):
 
     def test_redirect_to_signin_url(self):
         from pyramid.httpexceptions import HTTPFound
-        from pyramid_google_login import redirect_to_signin
+        from seganndb_login import redirect_to_signin
 
         request = mock.Mock()
 
@@ -32,7 +32,7 @@ class TestHelpers(unittest.TestCase):
 
     def test_redirect_to_signin_headers(self):
         from pyramid.httpexceptions import HTTPFound
-        from pyramid_google_login import redirect_to_signin
+        from seganndb_login import redirect_to_signin
 
         request = mock.Mock()
 
@@ -45,7 +45,7 @@ class TestHelpers(unittest.TestCase):
         self.assertIn(test_header, httpfound.headerlist)
 
     def test_find_landing_path(self):
-        from pyramid_google_login import find_landing_path
+        from seganndb_login import find_landing_path
 
         request = mock.Mock()
         request.registry.settings = {
@@ -57,7 +57,7 @@ class TestHelpers(unittest.TestCase):
         self.assertEqual(path, '/')
 
     def test_find_landing_path_landing_url(self):
-        from pyramid_google_login import find_landing_path
+        from seganndb_login import find_landing_path
 
         request = mock.Mock()
         request.registry.settings = {
@@ -69,7 +69,7 @@ class TestHelpers(unittest.TestCase):
         self.assertEqual(path, '/foobar')
 
     def test_find_landing_path_landing_route(self):
-        from pyramid_google_login import find_landing_path
+        from seganndb_login import find_landing_path
 
         request = mock.Mock()
         request.registry.settings = {
@@ -81,7 +81,7 @@ class TestHelpers(unittest.TestCase):
         self.assertEqual(path, request.route_path.return_value)
 
     def test_find_landing_path_landing_route_static(self):
-        from pyramid_google_login import find_landing_path
+        from seganndb_login import find_landing_path
 
         request = mock.Mock()
         request.registry.settings = {
@@ -94,7 +94,7 @@ class TestHelpers(unittest.TestCase):
         self.assertEqual(path, request.static_path.return_value)
 
     def test_find_landing_path_fallback(self):
-        from pyramid_google_login import find_landing_path
+        from seganndb_login import find_landing_path
 
         request = mock.Mock()
         request.registry.settings = {
