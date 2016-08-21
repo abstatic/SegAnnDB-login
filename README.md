@@ -26,7 +26,7 @@ Pyramid project's `__init__.py`:
 
 ```python
  config = Configurator(.....)
- config.include('pyramid_google_login')
+ config.include('seganndb_login')
 ```
 
 Alternately you can use the `pyramid.includes` configuration value in your
@@ -34,7 +34,7 @@ Alternately you can use the `pyramid.includes` configuration value in your
 
 ```ini
    [app:myapp]
-   pyramid.includes = pyramid_google_login
+   pyramid.includes = seganndb_login
 ```
 
 Setup: settings
@@ -90,7 +90,7 @@ Setup: Google project
 
 Notes:
 
-- No `Permissions` are needed by `pyramid_google_login` itself.
+- No `Permissions` are needed by `seganndb_login` itself.
 - Client ID parameters are heavily cached. In development, re-creating a client
   id is often the best idea.
 
@@ -100,7 +100,7 @@ General Usage
 
 When a user must be authenticated by Google, he must be sent to the
 `auth_signin` route url. The helper method
-`pyramid_google_login.redirect_to_signin` redirect the user to the sign in
+`seganndb_login.redirect_to_signin` redirect the user to the sign in
 page. This helper is handy to specify the next url and an optional message.
 
 ```python
